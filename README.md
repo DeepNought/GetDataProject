@@ -20,16 +20,16 @@ This is a peer reviewed and graded project.
 We are required to submit the following:
 
 - a tidy dataset submitted to the coursera course site
-- a link to a Github repository containing an R script (run_analysis.R) for performing
-the analysis, a code book (CodeBook.md) in markdown format which describes the variables,
+- a link to a Github repository containing an R script (**run_analysis.R**) for performing
+the analysis, a code book (**CodeBook.md**) in markdown format which describes the variables,
 the data and any transformations/work performed to clean the data, and this README.
 
 The R script should perform the following operations:
 
-- Merge the training and test datasets to create one dataset
-- Extract only the measurements on the mean and standard deviation of each measurement
-- Use descriptive activity names to label the activities in the dataset
-- Appropriately label the dataset with descriptive variable names
+- Merge the training and test datasets to create one dataset.
+- Extract only the measurements on the mean and standard deviation of each measurement.
+- Use descriptive activity names to label the activities in the dataset.
+- Appropriately label the dataset with descriptive variable names.
 - From the dataset in the above step, create a second, independent tidy dataset with
 the average of each variable for each activity and each subject.
 
@@ -45,7 +45,7 @@ the [UC Irvine Machine Learning Repository][2].
 
 According to the documentation provided with the dataset, the data was generated and built by
 recording 30 volunteer participants (subjects) performing daily living activities while carrying
-a waist-mounted smartphone embedded with inertial sensors. The daily activities were describe as:
+a waist-mounted smartphone embedded with inertial sensors. The daily activities are described as:
 WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, and LAYING.  The embedded
 accelerometer and gyroscope sensors captured tri-axial linear acceleration and tri-axial angular
 velocity readings at a constant rate of 50Hz. The resulting dataset was randomly partitioned into
@@ -62,7 +62,7 @@ The data pre-processing methodology and variable calculation was described as fo
 >therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of
 >features was obtained by calculating variables from the time and frequency domain.
 
-The **"raw"** data (which we were not required to operate on and clean) for each of the
+The *"raw"* data (which we were not required to operate on and clean) for each of the
 training and test sets, was provided in in three parts:
 
 - the total tri-axial acceleration (as measured by the accelerometer)
@@ -72,20 +72,25 @@ training and test sets, was provided in in three parts:
 This raw data is located in the "Inertial Signals" folder for each of the training and test sets.
 
 As mentioned in the block quote above, these signals where then pre-processed
-and used for calculating the 561 variables in the datasets we were required to subset and clean.
+and used for calculating the 561 variables in the datasets we were required to merge, subset and clean.
 
 The data we were required to work on were primarily contained in two text files: **X_train.txt** and
 **X_test.txt**, for the training and test subjects respectively.  The first, having 70% of the data,
 has 7,352 observations of 561 variables (7,352 x 561 table) and the second has 2,947 observations of
-the same 561 variables (2,947 x 561 table).  Two accompanying files, **subject_train.txt** and
+the same 561 variables (2,947 x 561 table).  All values in these two files are numeric, with values
+in the range of [-1, 1].  Two accompanying files, **subject_train.txt** and
 **subject_test.txt**, identified the subject (participant) for each observation.  The first file is
 (7, 352 x 1) and the second is (2,947 x 1).  The subjects are identified by a number from 1 to 30.
 Two additional files, **y_train.txt** and **y_test.txt** identified the activity the subjects were
 engaged in for each observation.  These files are also (7, 352 x 1) and (2,947 x 1), respectively.
 Since there were six activities (WALKING, WALKING_UPSTAIRS, etc.) these files contained values between
-1 and 6. Finally, an **activity_labels.txt** file was provided that maps the values (1 to 6) in the
+1 and 6. An **activity_labels.txt** file was provided that maps the values (1 to 6) in the
 previous two files just mentioned, to the respective character strings describing each activity
-(WALKING, WALKING_UPSTAIRS, etc.).  This file is a 6 x 2 table.
+(WALKING, WALKING_UPSTAIRS, etc.).  This file is a 6 x 2 table.  A **features.txt** file was included
+that contains the names of all 561 numeric variables.
+
+In addition to the above data files, a **README.txt** file contains information about the dataset, and
+a **features-info.txt** file contains information about the numeric variables.
 
 #### Data Manipulation
 
@@ -94,7 +99,7 @@ previous two files just mentioned, to the respective character strings describin
 The R script uses the *dplyr* package to operate on the data.  The **X_train.txt** and **X_test.txt** files
 were read into data.frame objects using *read.table()*.  The two data frames were then "merged"
 together using *bind_rows()* from the dplyr package.  (*rbind()* would have also worked.) This resulted
-in a 10299 x 561 data frame object. This met the first of our five requirements.
+in a 10299 x 561 data frame object.
 
 ##### Selecting the Columns
 
@@ -116,7 +121,7 @@ with a std() variable.
 
 The selection of the variables was accomplished by using the *grep()* function.  The **features.txt**
 file was read using *readLines()* and *grep()* was passed the search string and the vector returned
-by *readLines()* as arguments. (See the accompanying R script for the string passed to *grep().*  This
+by *readLines()* as arguments. (See the R script for the specific *grep()* call.  This
 yielded an index vector that was used to select the names of the variables as well as sub-setting the
 data frame object containing all 561 variables.  Again, 66 variables and their corresponding names were
 selected.
@@ -139,13 +144,13 @@ name *activity.*  This was done by a call to *bind_cols().*
 
 ##### Descriptive Variable Names
 
-This step was done prior to adding the activity column as described above.  Up to this point the data frame
-columns carried the default V1, V2, etc., as no column header was supplied with the data set.  To generate
+This step was done prior to the Descriptive Activity Names step described above.  Up to this point the data frame
+columns were by default named V1, V2, etc., as no column header was supplied with the numeric variables.  To generate
 more descriptive names programmatically the supplied **features.txt** file was read and used.  This file
 has names of the form *1 tBodyAcc-mean()-X* for each variable. Using *gsub()* the leading number and space
 and were stripped out.  In the same way the *()* were removed, and the dashes were replaced with
 underscores.  Also, some variables had a *BodyBody* string in their names, which appears to be an error,
-so this string was replaced by *Body." "This resulted in names like *BodyAcc_mean_X.* To these a leading
+so this string was replaced by *Body.*  This resulted in names like *BodyAcc_mean_X.* To these a leading
 *mean_* string was attached using *paste0()* to get names of the form *mean_BodyAcc_mean_X.* This might
 seem weird at first, but we were given *mean* values and asked to generate the *mean()* of those mean
 values.  See the R script for the *gsub()* function calls used to generate the variable names.
@@ -163,8 +168,10 @@ The required tidy dataset, with *"the average for each variable for each activit
 generated by two dplyr function calls chained together:  a call to *group_by(activity, subject)* and
 the output of that piped to a call to *summarise_each(funs(mean)).*  This resulted in a 180 x 68 table
 with thirty observations for each activity (one for each subject) and the average of the numerical data
-variables.  The table was written to a file named **tidy.txt** using *write.table()* with the optional
-arguments *row.names* and *quote* both set to FALSE.
+variables.  Before writing the table to file the tidy data frame was sorted by subject using the *dplyr
+arrange()* function.  See the R script for details.  The table was written to a file named **tidy.txt**
+using *write.table()* with the optional arguments *row.names* and *quote* both set to FALSE, and this file
+was submitted to the Coursera class site as part of this project's requirements.
 
 The table can be read back into R using *read.table("tidy.txt", header = TRUE)*
 
