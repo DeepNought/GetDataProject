@@ -37,7 +37,7 @@ the average of each variable for each activity and each subject.
 
 The work of generating, pre-processing and compiling the data was done by a number of researchers at
 [SmartLab][4], a Research Laboratory at the DITEN / DIBRIS Departments of the
-University of Genova. The paper describing this work can be found [here][5].  The data, titled
+University of Genova. The paper describing their work can be found [here][5].  The data, titled
 *Human Activity Recognition Using Smartphones DataSet,*  was made available to us [here][1] by
 the [UC Irvine Machine Learning Repository][2].
 
@@ -158,7 +158,7 @@ values.  See the R script for the *gsub()* function calls used to generate the v
 At this point another column was added to the front of the data
 frame to identify the subject (participant).  This information was supplied to us in the form of two
 files, **y_train.txt** and **y_test.txt**, as mentioned above.  For each observation in the dataset these
-files contain a number between 1-30 identifying the subject.  The files were read using *readLines()*,
+files identify the subject with a number between 1 and 30.  The files were read using *readLines()*,
 concatenated, and the column added to the front of the data frame using *bind_cols()* with the name
 "subject".
 
@@ -175,7 +175,7 @@ was submitted to the Coursera class site as part of this project's requirements.
 
 The table can be read back into R using *read.table("tidy.txt", header = TRUE).*  Note that the data frame
 that was written to file had the subject and activity columns as factors and all other columns as numeric.
-The table read in by *read.table()* above will read the activity as factor and the subject as integer and
+The table read in by *read.table()* above will read the activity as factor and the subject as integer, and
 all other columns as numeric.
 
 [3]: http://www.jstatsoft.org/v59/i10/paper
