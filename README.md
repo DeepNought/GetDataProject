@@ -1,5 +1,7 @@
 ### Coursera Getting and Cleaning Data Project, March 2015
 
+---
+
 #### Introduction
 
 This README documents the project for Coursera's *Getting and Cleaning Data*
@@ -9,8 +11,9 @@ The purpose of the project is to demonstrate our ability to collect, work with a
 clean a dataset.  The goal of the project is to prepare tidy data for use in
 later analysis.  Tidy data can be defined as having a "specific structure, wherein
 each variable is a column, each observation is a row, and each type of
-observational unit is a table." See [Wikham][3].  This is a peer reviewed and graded
-project.
+observational unit is a table." See [Wikham][3].
+
+This is a peer reviewed and graded project.
 
 #### Required Submissions
 
@@ -24,27 +27,27 @@ the data and any transformations/work performed to clean the data, and this READ
 The R script should perform the following operations:
 
 - Merge the training and test datasets to create one dataset
-- Extract only the measurements on the mean and standard deviation of each measurements
-- Uses descriptive activity names to label the activities in the dataset
-- Appropriately labels the dataset with descriptive variable names
-- From the dataset in the above step, creates a second, independent tidy dataset with
+- Extract only the measurements on the mean and standard deviation of each measurement
+- Use descriptive activity names to label the activities in the dataset
+- Appropriately label the dataset with descriptive variable names
+- From the dataset in the above step, create a second, independent tidy dataset with
 the average of each variable for each activity and each subject.
 
 #### Data Source and Getting the Data
 
 The work of generating, pre-processing and compiling the data was done by a number of researchers at
 [SmartLab][4], a Research Laboratory at the DITEN / DIBRIS Departments of the
-University of Genova. The paper describing this work can be found [here][5].  
-The data, titled *Human Activity Recognition Using Smartphones
-DataSet,*  was made available to us [here][1] by the [UC Irvine Machine Learning Repository][2]
+University of Genova. The paper describing this work can be found [here][5].  The data, titled
+*Human Activity Recognition Using Smartphones DataSet,*  was made available to us [here][1] by
+the [UC Irvine Machine Learning Repository][2].
 
 #### Data Description
 
 According to the documentation provided with the dataset, the data was generated and built by
 recording 30 volunteer participants (subjects) performing daily living activities while carrying
-a waist-mounted smartphone embedded with inertial sensors. The daily activities were:
+a waist-mounted smartphone embedded with inertial sensors. The daily activities were describe as:
 WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, and LAYING.  The embedded
-accelerometer and gyroscope sensors captured 3-axial linear acceleration and 3-axial angular
+accelerometer and gyroscope sensors captured tri-axial linear acceleration and tri-axial angular
 velocity readings at a constant rate of 50Hz. The resulting dataset was randomly partitioned into
 two sets, with 70% of the subjects selected for generating the *"training"* data and 30% the *"test"*
 data.  One of our tasks was to combine these two sets into one dataset.
@@ -69,9 +72,9 @@ training and test sets, was provided in in three parts:
 This raw data is located in the "Inertial Signals" folder for each of the training and test sets.
 
 As mentioned in the block quote above, these signals where then pre-processed
-and used for calculating the 561 variables in the datasets we were required to "clean."
+and used for calculating the 561 variables in the datasets we were required to subset and clean.
 
-The data we were required to work on was primarily contained in two text files: **X_train.txt** and
+The data we were required to work on were primarily contained in two text files: **X_train.txt** and
 **X_test.txt**, for the training and test subjects respectively.  The first, having 70% of the data,
 has 7,352 observations of 561 variables (7,352 x 561 table) and the second has 2,947 observations of
 the same 561 variables (2,947 x 561 table).  Two accompanying files, **subject_train.txt** and
@@ -89,70 +92,81 @@ previous two files just mentioned, to the respective character strings describin
 ##### Merging the Data
 
 The R script uses the *dplyr* package to operate on the data.  The **X_train.txt** and **X_test.txt** files
-were read into a data.frame object using *read.table()*.  The two data frames were then "merged"
-together using *bind_rows()* from the dplyr package.  (rbind() would have also worked.) This resulted
+were read into data.frame objects using *read.table()*.  The two data frames were then "merged"
+together using *bind_rows()* from the dplyr package.  (*rbind()* would have also worked.) This resulted
 in a 10299 x 561 data frame object. This met the first of our five requirements.
 
 ##### Selecting the Columns
 
-We were then asked to subset this data frame object, extracting "only the measurements on the mean
-and standard deviation of each measurement."  Looking at the **features.txt** file, which lists the
-names of the 561 variables showed quite a number of variables with *mean()* and *std()* in their names.
-Reading this file into R using *readLines()* and greping for occurrences of *mean* and *std* yielded 79
-variable names.  So I went back to thinking what the phrase "of each measurement" might mean.  According
-to the README file that came with the data, and as described above, only two things were "measured" by the
-phone sensors: tri-axial acceleration by the accelerometer (which was subsequently decomposed into the body
-and gravity components via a low-pass filter), and tri-axial angular velocity by the gyroscope.  All the
-other variables, according to the **features-info.txt** file, were generated from these three via some kind
-of mathematical transformation.  For example, the *Jerk* signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ)
-were obtained by taking the time derivative of the body linear acceleration and angular velocity, the *Mag*
-family of signals were calculated using the Euclidean norm, and the many frequency domain variables were
-calculated by taking the Fast Fourier Transform of their time domain counterparts.  So I would argue that
-only three sets of variables constitute measurements and need be selected:  the tri-axial body acceleration
-mean and std (columns 1:6), the tri-axial gravity acceleration mean and std (columns 41:46), and the
-body gyroscope mean and std (columns 121:126).  Which is what the R script does, by subsetting the columns
-as noted.
+We were required to subset this data frame object, extracting *"only the measurements on the mean
+and standard deviation of each measurement."*  The **features.txt** file lists the
+names of all 561 variables, with *mean()* and *std()* appearing as pairs *"of each measurement"* 33 times.
+Twenty of these pairs represent measurements in the time domain, denoted by a leading "t" in their
+names, and thirteen pairs, denoted by a leading "f" in their names, were calculated by applying
+a Fast Fourier Transform to the time domain signals.  These 33 pairs, for a total of 66 variables, were
+selected.  
+
+There are thirteen frequency domain variables whose names end with *meanFreq(),* which were not
+included in the selection since they were not paired with a corresponding *stdFreq()* variable.
+
+There are also seven variables with *Mean* in their name, e.g. *gravityMean,* that were used in the
+calculation of other variables relating to the angle of vector components, and these were also excluded
+from the the selection process, as they appear to be intermediary variables and are also not paired up
+with a std() variable.
+
+The selection of the variables was accomplished by using the *grep()* function.  The **features.txt**
+file was read using *readLines()* and *grep()* was passed the search string and the vector returned
+by *readLines()* as arguments. (See the accompanying R script for the string passed to *grep().*  This
+yielded an index vector that was used to select the names of the variables as well as sub-setting the
+data frame object containing all 561 variables.  Again, 66 variables and their corresponding names were
+selected.
 
 ##### Descriptive Activity Names
 
-We were asked to "use descriptive activity names to label the activities in the dataset".  This implies
-adding another column to our data.frame object with the information contained in the **y_train.txt** and
-**y_test.txt** files. The files were read by opening a file connection and using *readLines()*.  But like
-our numerical data these files were split corresponding to the training and test split of the subjects.
-So after reading the vectors had to be concatenated in the same order as the data frames.  At this point
-the vector has values in the 1-6 range.  Not very descriptive.  To make it more so, the
-**activity_labels.txt** file can be used as a "lookup table" to substitute the numerical values for the
-corresponding characters strings (WALKING, etc.). After reading in the **activity_labels.txt** file as a
-data frame, a simple function returning the string value for the corresponding numerical value was passed
-to *sapply()*, along with the 10,299-long vector of numerical values for each activity.  This gave the
-needed vector with which to make a descriptive activity column.  This was done by a call to *bind_cols().*
-The column was added to the "front" of the data frame and given the name "activity."
+We were asked to *"use descriptive activity names to label the activities in the dataset".*  This implies
+adding another column to our data frame object with the information contained in the **y_train.txt** and
+**y_test.txt** files. The files were read by opening a file connection and using *readLines()*.  Like
+our numerical data, these files were split corresponding to the training and test split of the subjects.
+After reading in these two files the resulting vectors were concatenated in the same order as the
+numeric variable data frames.  The vector has values in the range of 1..6, which is not very descriptive.
+To make it more descriptive, the **activity_labels.txt** file was used as a "lookup table" to substitute
+the numerical values for the corresponding character strings (WALKING, etc.). After reading in the
+**activity_labels.txt** file as a data frame, a simple function returning the string value for the
+corresponding numerical value was passed anonymously to *sapply()*, along with the 10,299-long vector
+of numerical values for each activity.  This gave the needed vector with which to make a descriptive
+activity column.  This vector was inserted as a column to the "front" of the data frame and given the
+name *activity.*  This was done by a call to *bind_cols().*
 
 ##### Descriptive Variable Names
 
 This step was done prior to adding the activity column as described above.  Up to this point the data frame
 columns carried the default V1, V2, etc., as no column header was supplied with the data set.  To generate
 more descriptive names programmatically the supplied **features.txt** file was read and used.  This file
-gave a name for each variable of the form *1 tBodyAcc-mean()-X.* Using *gsub()* the leading number, space
-and "t" were stripped.  In the same way the *()* were removed, and the dashes were replaced with
-underscores.  This resulted in names like *BodyAcc_mean_X.* To these was a leading "mean_" was attached
-using *paste0,* to get names of the form *mean_BodyAcc_mean_X.* This might seem weird at first, but it
-really is a mean of mean values.
+has names of the form *1 tBodyAcc-mean()-X* for each variable. Using *gsub()* the leading number and space
+and were stripped out.  In the same way the *()* were removed, and the dashes were replaced with
+underscores.  Also, some variables had a *BodyBody* string in their names, which appears to be an error,
+so this string was replaced by *Body." "This resulted in names like *BodyAcc_mean_X.* To these a leading
+*mean_* string was attached using *paste0()* to get names of the form *mean_BodyAcc_mean_X.* This might
+seem weird at first, but we were given *mean* values and asked to generate the *mean()* of those mean
+values.  See the R script for the *gsub()* function calls used to generate the variable names.
 
-Speaking of descriptive variable names, at this point another column was added to the front of the data
-frame, to identify the subject (participant).  This information was supplied to us in the form of two
+At this point another column was added to the front of the data
+frame to identify the subject (participant).  This information was supplied to us in the form of two
 files, **y_train.txt** and **y_test.txt**, as mentioned above.  For each observation in the dataset these
 files contain a number between 1-30 identifying the subject.  The files were read using *readLines()*,
 concatenated, and the column added to the front of the data frame using *bind_cols()* with the name
-"subjects".
+"subject".
 
 ##### Tidy Dataset
 
-The required tidy dataset, with "the average for each variable for each activity and each subject," was
-generated by two dplyr function calls chained together:  a call to *group_by(subject, activity)* and
-the output of that piped to a call to *summarise_each(funs(mean)).*  This resulted in a 180 x 20 table
-with six observations for each subject (one for each activity) and the average of the numerical data
-variables.
+The required tidy dataset, with *"the average for each variable for each activity and each subject,"* was
+generated by two dplyr function calls chained together:  a call to *group_by(activity, subject)* and
+the output of that piped to a call to *summarise_each(funs(mean)).*  This resulted in a 180 x 68 table
+with thirty observations for each activity (one for each subject) and the average of the numerical data
+variables.  The table was written to a file named **tidy.txt** using *write.table()* with the optional
+arguments *row.names* and *quote* both set to FALSE.
+
+The table can be read back into R using *read.table("tidy.txt", header = TRUE)*
 
 [3]: http://www.jstatsoft.org/v59/i10/paper
 [1]: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
