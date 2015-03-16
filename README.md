@@ -11,7 +11,7 @@ The purpose of the project is to demonstrate our ability to collect, work with a
 clean a dataset.  The goal of the project is to prepare tidy data for use in
 later analysis.  Tidy data can be defined as having a "specific structure, wherein
 each variable is a column, each observation is a row, and each type of
-observational unit is a table." See [Wikham][3].
+observational unit is a table." See [Wickham][3].
 
 This is a peer reviewed and graded project.
 
@@ -19,10 +19,10 @@ This is a peer reviewed and graded project.
 
 We are required to submit the following:
 
-- a tidy dataset submitted to the coursera course site
+- a tidy dataset submitted to the Coursera class site
 - a link to a Github repository containing an R script (**run_analysis.R**) for performing
 the analysis, a code book (**CodeBook.md**) in markdown format which describes the variables,
-the data and any transformations/work performed to clean the data, and this README.
+the data and any transformations performed to clean the data, and this README.
 
 The R script should perform the following operations:
 
@@ -45,7 +45,7 @@ the [UC Irvine Machine Learning Repository][2].
 
 According to the documentation provided with the dataset, the data was generated and built by
 recording 30 volunteer participants (subjects) performing daily living activities while carrying
-a waist-mounted smartphone embedded with inertial sensors. The daily activities are described as:
+a waist-mounted smartphone embedded with inertial sensors. The daily activities are labelled
 WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, and LAYING.  The embedded
 accelerometer and gyroscope sensors captured tri-axial linear acceleration and tri-axial angular
 velocity readings at a constant rate of 50Hz. The resulting dataset was randomly partitioned into
@@ -77,8 +77,8 @@ and used for calculating the 561 variables in the datasets we were required to m
 The data we were required to work on were primarily contained in two text files: **X_train.txt** and
 **X_test.txt**, for the training and test subjects respectively.  The first, having 70% of the data,
 has 7,352 observations of 561 variables (7,352 x 561 table) and the second has 2,947 observations of
-the same 561 variables (2,947 x 561 table).  All values in these two files are numeric, with values
-in the range of [-1, 1].  Two accompanying files, **subject_train.txt** and
+the same 561 variables (2,947 x 561 table).  All variables in these two files are numeric, with normalized
+values in the range of [-1, 1].  Two accompanying files, **subject_train.txt** and
 **subject_test.txt**, identified the subject (participant) for each observation.  The first file is
 (7, 352 x 1) and the second is (2,947 x 1).  The subjects are identified by a number from 1 to 30.
 Two additional files, **y_train.txt** and **y_test.txt** identified the activity the subjects were
@@ -121,8 +121,8 @@ with a std() variable.
 
 The selection of the variables was accomplished by using the *grep()* function.  The **features.txt**
 file was read using *readLines()* and *grep()* was passed the search string and the vector returned
-by *readLines()* as arguments. (See the R script for the specific *grep()* call.  This
-yielded an index vector that was used to select the names of the variables as well as sub-setting the
+by *readLines()* as arguments. (See the R script for the specific *grep()* call.)  This
+yielded an index vector that was used to select the names of the variables as well as to subset the
 data frame object containing all 561 variables.  Again, 66 variables and their corresponding names were
 selected.
 
@@ -151,7 +151,7 @@ has names of the form *1 tBodyAcc-mean()-X* for each variable. Using *gsub()* th
 and were stripped out.  In the same way the *()* were removed, and the dashes were replaced with
 underscores.  Also, some variables had a *BodyBody* string in their names, which appears to be an error,
 so this string was replaced by *Body.*  This resulted in names like *BodyAcc_mean_X.* To these a leading
-*mean_* string was attached using *paste0()* to get names of the form *mean_BodyAcc_mean_X.* This might
+*mean_* string was attached using *paste0()*, to get names of the form *mean_BodyAcc_mean_X.* This might
 seem weird at first, but we were given *mean* values and asked to generate the *mean()* of those mean
 values.  See the R script for the *gsub()* function calls used to generate the variable names.
 
@@ -171,9 +171,12 @@ with thirty observations for each activity (one for each subject) and the averag
 variables.  Before writing the table to file the tidy data frame was sorted by subject using the *dplyr
 arrange()* function.  See the R script for details.  The table was written to a file named **tidy.txt**
 using *write.table()* with the optional arguments *row.names* and *quote* both set to FALSE, and this file
-was submitted to the Coursera class site as part of this project's requirements.
+was submitted to the Coursera class site as part of this project's requirements.  
 
-The table can be read back into R using *read.table("tidy.txt", header = TRUE)*
+The table can be read back into R using *read.table("tidy.txt", header = TRUE).*  Note that the data frame
+that was written to file had the subject and activity columns as factors and all other columns as numeric.
+The table read in by *read.table()* above will read the activity as factor and the subject as integer and
+all other columns as numeric.
 
 [3]: http://www.jstatsoft.org/v59/i10/paper
 [1]: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
