@@ -80,7 +80,7 @@ has 7,352 observations of 561 variables (7,352 x 561 table) and the second has 2
 the same 561 variables (2,947 x 561 table).  All variables in these two files are numeric, with normalized
 values in the range of [-1, 1].  Two accompanying files, **subject_train.txt** and
 **subject_test.txt**, identified the subject (participant) for each observation.  The first file is
-(7, 352 x 1) and the second is (2,947 x 1).  The subjects are identified by a number from 1 to 30.
+(7,352 x 1) and the second is (2,947 x 1).  The subjects are identified by a number from 1 to 30.
 Two additional files, **y_train.txt** and **y_test.txt** identified the activity the subjects were
 engaged in for each observation.  These files are also (7, 352 x 1) and (2,947 x 1), respectively.
 Since there were six activities (WALKING, WALKING_UPSTAIRS, etc.) these files contained values between
