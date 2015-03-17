@@ -88,7 +88,7 @@ ys <- c(y_train, y_test)
 activity_labels_file <- "./UCI HAR Dataset/activity_labels.txt"
 act_labels_df <- read.table(activity_labels_file,
                             colClasses = c("numeric", "character")
-							)
+                            )
 # Use sapply() and an anonymous function that returns the string in the
 # second column of act_labels_df for the corresponding number in the first
 # column, and apply this function to the activities vector ys, above. 
