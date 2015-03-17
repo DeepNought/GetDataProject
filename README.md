@@ -174,10 +174,7 @@ using *write.table()* with the optional arguments *row.names* and *quote* both s
 was submitted to the Coursera class site as part of this project's requirements.  
 
 The table can be read back into R using *read.table("tidy.txt", header = TRUE, colClasses = c(activity =
-"factor", subject = "factor"))*.*  Note that the data frame
-that was written to file had the subject and activity columns as factors and all other columns as numeric.
-The table read in by *read.table()* above will read the activity as factor and the subject as integer, and
-all other columns as numeric.
+"factor", subject = "factor")).*
 
 [3]: http://www.jstatsoft.org/v59/i10/paper
 [1]: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
