@@ -118,11 +118,11 @@ Units for the gyroscope jerk magnitude (GyroJerkMag) are radians/square second
 
 Units for the Fast Fourier Transform variables are the same as their corresponding time domain variables.
 
-- 1. mean_tBodyAcc_mean_X
+- mean_tBodyAcc_mean_X
 
-- 2. mean_tBodyAcc_mean_Y
+- mean_tBodyAcc_mean_Y
  
-- 3. mean_tBodyAcc_mean_Z
+- mean_tBodyAcc_mean_Z
 
 - 4. mean_tBodyAcc_std_X
 
