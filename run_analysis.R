@@ -138,8 +138,4 @@ print(out_df, n = 35)     # just to see if it's working
 # write the output table..." " is default separator, no row names, no quotes
 write.table(out_df, "tidy.txt", row.names = FALSE, quote = FALSE)
 
-# the table can be read back into R with:
-# read.table("tidy.txt", header = TRUE,
-#  									  colClasses = c(activity = "factor",
-#												     subject = "factor")
-#									)
+# See the README for how to read this table back into R
