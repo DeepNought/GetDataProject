@@ -91,13 +91,13 @@ Note:  the file **tidy.txt** can be read into R using:
 
 #### Data Dictionary
 
-- 1. activity:  factor with 6 levels (LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS WALKING_UPSTAIRS)
+- activity:  factor with 6 levels (LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS WALKING_UPSTAIRS)
 
-- 2. subject:  factor with 30 levels (1..30)
+- subject:  factor with 30 levels (1..30)
 
 All variables listed below are numeric and bounded in the range of [-1, 1].  (The corresponding variables
 in the original dataset were normalized and bounded in the range [-1, 1].)  X, Y, Z in the variable names
-denotes vector components for the respective axis.  All variables names start with *mean_* because they are
+denotes vector components for the respective axis.  All variable names start with *mean_* because they are
 the mean of the original variables.
 
 Units for the acceleration variables (Acc) are meters/square second
@@ -124,134 +124,131 @@ Units for the Fast Fourier Transform variables are the same as their correspondi
  
 - mean_tBodyAcc_mean_Z
 
-- 4. mean_tBodyAcc_std_X
+- mean_tBodyAcc_std_X
 
-- 5. mean_tBodyAcc_std_Y
+- mean_tBodyAcc_std_Y
 
-- 6. mean_tBodyAcc_std_Z
+- mean_tBodyAcc_std_Z
 
-- 7. mean_tGravityAcc_mean_X
+- mean_tGravityAcc_mean_X
 
-- 8. mean_tGravityAcc_mean_Y
+- mean_tGravityAcc_mean_Y
 
-- 9. mean_tGravityAcc_mean_Z
+- mean_tGravityAcc_mean_Z
 
-- 10. mean_tGravityAcc_std_X
+- mean_tGravityAcc_std_X
 
-- 11. mean_tGravityAcc_std_Y
+- mean_tGravityAcc_std_Y
 
-- 12. mean_tGravityAcc_std_Z
+- mean_tGravityAcc_std_Z
 
-- 13. mean_tBodyAccJerk_mean_X
+- mean_tBodyAccJerk_mean_X
 
-- 14. mean_tBodyAccJerk_mean_Y
+- mean_tBodyAccJerk_mean_Y
 
-- 15. mean_tBodyAccJerk_mean_Z
+- mean_tBodyAccJerk_mean_Z
 
-- 16. mean_tBodyAccJerk_std_X
+- mean_tBodyAccJerk_std_X
 
-- 17. mean_tBodyAccJerk_std_Y
+- mean_tBodyAccJerk_std_Y
 
-- 18. mean_tBodyAccJerk_std_Z
+- mean_tBodyAccJerk_std_Z
 
-- 19. mean_tBodyGyro_mean_X 
+- mean_tBodyGyro_mean_X 
 
-- 20. mean_tBodyGyro_mean_Y
+- mean_tBodyGyro_mean_Y
 
-- 21. mean_tBodyGyro_mean_Z
+- mean_tBodyGyro_mean_Z
 
-- 22. mean_tBodyGyro_std_X
+- mean_tBodyGyro_std_X
 
-- 23. mean_tBodyGyro_std_Y
+- mean_tBodyGyro_std_Y
 
-- 24.  mean_tBodyGyro_std_Z
+- mean_tBodyGyro_std_Z
 
-- 25. mean_tBodyGyroJerk_mean_X
+- mean_tBodyGyroJerk_mean_X
 
-- 26. mean_tBodyGyroJerk_mean_Y
+- mean_tBodyGyroJerk_mean_Y
 
-- 27. mean_tBodyGyroJerk_mean_Z
+- mean_tBodyGyroJerk_mean_Z
 
-- 28. mean_tBodyGyroJerk_std_X
+- mean_tBodyGyroJerk_std_X
 
-- 29. mean_tBodyGyroJerk_std_Y
+- mean_tBodyGyroJerk_std_Y
 
-- 30. mean_tBodyGyroJerk_std_Z
+- mean_tBodyGyroJerk_std_Z
 
-- 31. mean_tBodyAccMag_mean
+- mean_tBodyAccMag_mean
 
-- 32. mean_tBodyAccMag_std
+- mean_tBodyAccMag_std
 
-- 33. mean_tGravityAccMag_mean
+- mean_tGravityAccMag_mean
 
-- 34. mean_tGravityAccMag_std
+- mean_tGravityAccMag_std
 
-- 35. mean_tBodyAccJerkMag_mean
+- mean_tBodyAccJerkMag_mean
 
-- 36. mean_tBodyAccJerkMag_std
+- mean_tBodyAccJerkMag_std
 
-- 37. mean_tBodyGyroMag_mean
+- mean_tBodyGyroMag_mean
 
-- 38. mean_tBodyGyroMag_std
+- mean_tBodyGyroMag_std
 
-- 39. mean_tBodyGyroJerkMag_mean
+- mean_tBodyGyroJerkMag_mean
 
-- 40. mean_tBodyGyroJerkMag_std
+- mean_tBodyGyroJerkMag_std
 
-- 41. mean_fBodyAcc_mean_X
+- mean_fBodyAcc_mean_X
 
-- 42. mean_fBodyAcc_mean_Y
+- mean_fBodyAcc_mean_Y
 
-- 43. mean_fBodyAcc_mean_Z
+- mean_fBodyAcc_mean_Z
 
-- 44. mean_fBodyAcc_std_X
+- mean_fBodyAcc_std_X
 
-- 45. mean_fBodyAcc_std_Y
+- mean_fBodyAcc_std_Y
 
-- 46. mean_fBodyAcc_std_Z
+- mean_fBodyAcc_std_Z
 
-- 47. mean_fBodyAccJerk_mean_X
+- mean_fBodyAccJerk_mean_X
 
-- 48. mean_fBodyAccJerk_mean_Y
+- mean_fBodyAccJerk_mean_Y
 
-- 49. mean_fBodyAccJerk_mean_Z
+- mean_fBodyAccJerk_mean_Z
 
-- 50. mean_fBodyAccJerk_std_X
+- mean_fBodyAccJerk_std_X
 
-- 51. mean_fBodyAccJerk_std_Y
+- mean_fBodyAccJerk_std_Y
 
-- 52. mean_fBodyAccJerk_std_Z
+- mean_fBodyAccJerk_std_Z
 
-- 53. mean_fBodyGyro_mean_X
+- mean_fBodyGyro_mean_X
 
-- 54. mean_fBodyGyro_mean_Y
+- mean_fBodyGyro_mean_Y
 
-- 55. mean_fBodyGyro_mean_Z
+- mean_fBodyGyro_mean_Z
 
-- 56. mean_fBodyGyro_std_X
+- mean_fBodyGyro_std_X
 
-- 57. mean_fBodyGyro_std_Y
+- mean_fBodyGyro_std_Y
 
-- 58. mean_fBodyGyro_std_Z
+- mean_fBodyGyro_std_Z
 
-- 59. mean_fBodyAccMag_mean
+- mean_fBodyAccMag_mean
 
-- 60. mean_fBodyAccMag_std
+- mean_fBodyAccMag_std
 
-- 61. mean_fBodyAccJerkMag_mean
+- mean_fBodyAccJerkMag_mean
 
-- 62. mean_fBodyAccJerkMag_std
+- mean_fBodyAccJerkMag_std
 
-- 63. mean_fBodyGyroMag_mean
+- mean_fBodyGyroMag_mean
 
-- 64. mean_fBodyGyroMag_std
+- mean_fBodyGyroMag_std
 
-- 65. mean_fBodyGyroJerkMag_mean
+- mean_fBodyGyroJerkMag_mean
 
-- 66. mean_fBodyGyroJerkMag_std
-
-
-
+- mean_fBodyGyroJerkMag_std
 
 
 [1]: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
