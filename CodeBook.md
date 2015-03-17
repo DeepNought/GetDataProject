@@ -1,169 +1,260 @@
 ### Coursera Getting and Cleaning Data Project, March 2015
 
+---
+
 ### Code Book
+
+---
 
 #### Background
 
-The titled Coursera class project required us to obtain a dataset and manipulate
-it in order to produce a tidy dataset for use in later analysis.
+The titled Coursera class project required us to obtain a dataset and manipulate it in order to produce a
+tidy dataset for use in later analysis.
 
-The original dataset was generated, pre-processed and compiled by a number of
-researchers at [SmartLab][1], a Research Laboratory at the DITEN / DIBRIS
-Departments of the University of Genova. The paper describing their work can be
-found [here][2]. The data, titled *Human Activity Recognition Using Smartphones
-DataSet,* was made available to us [here][3] by the [UC Irvine Machine Learning
-Repository][4].
+The original dataset was generated, pre-processed and compiled by a number of researchers at
+[SmartLab][4], a Research Laboratory at the DITEN / DIBRIS Departments of the
+University of Genova. The paper describing their work can be found [here][5].  The data, titled
+*Human Activity Recognition Using Smartphones DataSet,*  was made available to us [here][1] by
+the [UC Irvine Machine Learning Repository][2].
 
-[1]: <https://sites.google.com/site/smartlabdibrisunige/>
+The experiment that was carried out to gather the data, and the methodology for processing the data was
+described by the authors as follows:
 
-[2]: <http://link.springer.com/chapter/10.1007/978-3-642-35395-6_30>
+>The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
 
-[3]: <http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones>
+>The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. See 'features_info.txt' for more details. 
 
-[4]: <http://archive.ics.uci.edu/ml/index.html>
-
-The experiment that was carried out to gather the data, and the methodology for
-processing the data was described by the authors as follows:
-
->   The experiments have been carried out with a group of 30 volunteers within
->   an age bracket of 19-48 years. Each person performed six activities
->   (WALKING, WALKING\_UPSTAIRS, WALKING\_DOWNSTAIRS, SITTING, STANDING, LAYING)
->   wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded
->   accelerometer and gyroscope, we captured 3-axial linear acceleration and
->   3-axial angular velocity at a constant rate of 50Hz. The experiments have
->   been video-recorded to label the data manually. The obtained dataset has
->   been randomly partitioned into two sets, where 70% of the volunteers was
->   selected for generating the training data and 30% the test data.
-
->   The sensor signals (accelerometer and gyroscope) were pre-processed by
->   applying noise filters and then sampled in fixed-width sliding windows of
->   2.56 sec and 50% overlap (128 readings/window). The sensor acceleration
->   signal, which has gravitational and body motion components, was separated
->   using a Butterworth low-pass filter into body acceleration and gravity. The
->   gravitational force is assumed to have only low frequency components,
->   therefore a filter with 0.3 Hz cutoff frequency was used. From each window,
->   a vector of features was obtained by calculating variables from the time and
->   frequency domain. See 'features\_info.txt' for more details.
 
 The following files were included:
 
--   **README.txt**: describes the experiment and methodology for gathering and
-    pre-processing of the *"raw"* data; describes what is provided for each
-    observation; describes the contents of the various files included with the
-    data, and includes the licence under which the data was made available to
-    the public.
+- **README.txt**: describes the experiment and methodology for gathering and pre-processing of the *"raw"*
+data; describes what is provided for each observation; describes the contents of the various files included
+with the data, and includes the licence under which the data was made available to the public.
+- **features.txt**: a list of the 561 variable names.
+- **features_info.txt**: briefly describes the 561 variables.
+- **activity_labels.txt**: a 6 x 2 table that maps activity codes with their activity names.
+- **X_train.txt**: a 7,352 x 561 table of numeric variables for the *training* set.
+- **y_train.txt**: integer codes in the range of 1..30 identifying the subject in each observation of the
+training set.
+- **X_test.txt**: a 7,352 x 561 table of numeric variables for the *test* set.
+- **y_test.txt**: integer codes in the range of 1..30 identifying the subject in each observation of the
+test set.
+- **subject_train.txt**: integer codes in the range of 1..6 identifying the activity the training
+subjects were engaged in for each observation.
+- **subject_test.txt**: same as above for the test subjects
 
--   **features.txt**: a list of the 561 variable names.
+The **features_info.txt** file gave the following information on the dataset variables (features):
 
--   **features\_info.txt**: briefly describes the 561 variables.
+>The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
 
--   **activity\_labels.txt**: a 6 x 2 table that maps activity codes with their
-    activity names.
+>Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
 
--   **X\_train.txt**: a 7,352 x 561 table of numeric variables for the
-    *training* set.
+>Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
 
--   **y\_train.txt**: integer codes in the range of 1..30 identifying the
-    subject in each observation of the training set.
-
--   **X\_test.txt**: a 7,352 x 561 table of numeric variables for the *test*
-    set.
-
--   **y\_test.txt**: integer codes in the range of 1..30 identifying the subject
-    in each observation of the test set.
-
--   **subject\_train.txt**: integer codes in the range of 1..6 identifying the
-    activity the training subjects were engaged in for each observation.
-
--   **subject\_test.txt**: same as above for the test subjects
-
-The **features\_info.txt** file gave the following information on the dataset
-variables (features):
-
->   The features selected for this database come from the accelerometer and
->   gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain
->   signals (prefix 't' to denote time) were captured at a constant rate of 50
->   Hz. Then they were filtered using a median filter and a 3rd order low pass
->   Butterworth filter with a corner frequency of 20 Hz to remove noise.
->   Similarly, the acceleration signal was then separated into body and gravity
->   acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low
->   pass Butterworth filter with a corner frequency of 0.3 Hz.
-
->   Subsequently, the body linear acceleration and angular velocity were derived
->   in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ).
->   Also the magnitude of these three-dimensional signals were calculated using
->   the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag,
->   tBodyGyroMag, tBodyGyroJerkMag).
-
->   Finally a Fast Fourier Transform (FFT) was applied to some of these signals
->   producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag,
->   fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain
->   signals).
-
->   These signals were used to estimate variables of the feature vector for each
->   pattern:  
->   '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+>These signals were used to estimate variables of the feature vector for each pattern:  
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
 
 #### Data Manipulation
 
-An R script, **run\_analysis.R**, was written to read the above data files and
-manipulate the data with the aim of selecting a subset of the variables and
-producing a tidy data set that grouped the activity and subject variables and
-calculated the mean for each of the remaining numeric variables. The script used
+An R script, **run_analysis.R**, was written to read the above data files and manipulate the data with the
+aim of selecting a subset of the variables and producing a tidy data set that grouped the activity and
+subject variables and calculated the mean for each of the remaining numeric variables.  The script used
 *dplyr* functions to perform the following data manipulations:
 
--   Downloaded the zipped data file and unzipped it.
+- 1.  Downloaded the zipped data file and unzipped it.
+- 2.  Read the **X_train.txt** and **X_test.txt** files into data.frame objects using read.table() and
+concatenated them using bind_rows().
+- 3.  Read the **features.txt** file to select a subset of the variables and to create descriptive names for
+them.
+- 4.  Used *grep()* to select only variable names that had *mean()* and *std()* as part of their name.
+- 5.  The index vector returned by *grep()* was used to subset the data frame created in step 2 and
+keep only the variables that had *mean()* or *std()* in their names.
+- 6.  *gsub()* was used to modify the names of the selected variables: leading digits and spaces were
+removed, *()* were removed, dashes were replaced by underscores, and the string *mean_* was pasted to
+the beginning of each variable name.  The resulting names were assigned to the columns of the data.frame
+object.
+- 7.  The **y.train.txt** and **y.test.txt** files were read using *readLines()* and their contents
+concatenated.
+- 8.  **activity_labels.txt** was read into a data.frame object, and was used as a lookup table to turn
+the vector in step 7 above into a vector of activity labels using *sapply()* and an anonymous function.
+- 9.  The vector from step 8 above was inserted into the data.frame object from step 2 above and named
+*activity*
+- 10.  **subject_train.txt** and **subject_test.txt** were read and concatenated.  The resulting vector was
+inserted into the data.frame object from step 2 above and named *subject.*
+- 11.  This data frame was then grouped by the *activity* and *subject* using *group_by(),* and the mean() of
+the numeric variables was calculated by a call to *summarise_each().*
+- 12.  The data frame was then ordered by a call to *arrange().*
+- 13.  Finally, the data frame was written to a file named **tidy.txt** by a call to write.table().
 
--   Read the **X\_train.txt** and **X\_test.txt** files into data.frame objects
-    using read.table() and concatenated them using bind\_rows().
-
--   Read the **features.txt** file to select a subset of the variables and to
-    create descriptive names for them.
-
--   Used *grep()* to select only variable names that had *mean()* and *std()* as
-    part of their name.
-
--   The index vector returned by *grep()* was used to subset the data frame
-    created in step 2 and keep only the variables that had *mean()* or *std()*
-    in their names.
-
--   *gsub()* was used to modify the names of the selected variables: leading
-    digits and spaces were removed, *()* were removed, dashes were replaced by
-    underscores, and the string *mean\_* was pasted to the beginning of each
-    variable name. The resulting names were assigned to the columns of the
-    data.frame object.
-
--   The **y.train.txt** and **y.test.txt** files were read using *readLines()*
-    and their contents concatenated.
-
--   **activity\_labels.txt** was read into a data.frame object, and was used as
-    a lookup table to turn the vector in step 7 above into a vector of activity
-    labels using *sapply()* and an anonymous function.
-
--   The vector from step 8 above was inserted into the data.frame object from
-    step 2 above and named *activity*
-
--   **subject\_train.txt** and **subject\_test.txt** were read and concatenated.
-    The resulting vector was inserted into the data.frame object from step 2
-    above and named *subject.*
-
--   This data frame was then grouped by the *activity* and *subject* using
-    *group\_by(),* and the mean() of the numeric variables was calculated by a
-    call to *summarise\_each().*
-
--   The data frame was then ordered by a call to *arrange().*
-
--   Finally, the data frame was written to a file named **tidy.txt** by a call
-    to write.table().
-
-Note: the file **tidy.txt** can be read into R using: - *read.table("tidy.txt",
-header = T, colClasses = c(activity = "factor", subject = "factor"))*
+Note:  the file **tidy.txt** can be read into R using:
+- *read.table("tidy.txt", header = TRUE, colClasses = c(activity = "factor", subject = "factor"))*
 
 #### Data Dictionary
 
-activity
+- 1. activity:  factor with 6 levels (LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS WALKING_UPSTAIRS)
 
-factor with 6 levels
+- 2. subject:  factor with 30 levels (1..30)
 
-"LAYING" "SITTING" "STANDING" "WALKING"  
-"WALKING\_DOWNSTAIRS" "WALKING\_UPSTAIRS"
+All variables listed below are numeric and bounded in the range of [-1, 1].  (The corresponding variables
+in the original dataset were normalized and bounded in the range [-1, 1].)  X, Y, Z in the variable names
+denotes vector components for the respective axis.  All variables names start with *mean_* because they are
+the mean of the original variables.
+
+Units for the acceleration variables (Acc) are meters/square second
+
+Units for the jerk variables (AccJerk) are meters/cube second
+
+Units for the gyroscope reading variables (Gyro) are radians/second
+
+Units for the gyroscope jerk variables (GyroJerk) are radians/square second
+
+Units for the acceleration magnitude (AccMag) are meters/square sec
+
+Units for the acceleration jerk magnitude (AccJerkMag) are meters/cube sec
+
+Units for the gyroscope reading magnitude (GyroMag) are radians/second
+
+Units for the gyroscope jerk magnitude (GyroJerkMag) are radians/square second
+
+Units for the Fast Fourier Transform variables are the same as their corresponding time domain variables.
+
+- 1. mean_tBodyAcc_mean_X
+
+- 2. mean_tBodyAcc_mean_Y
+ 
+- 3. mean_tBodyAcc_mean_Z
+
+- 4. mean_tBodyAcc_std_X
+
+- 5. mean_tBodyAcc_std_Y
+
+- 6. mean_tBodyAcc_std_Z
+
+- 7. mean_tGravityAcc_mean_X
+
+- 8. mean_tGravityAcc_mean_Y
+
+- 9. mean_tGravityAcc_mean_Z
+
+- 10. mean_tGravityAcc_std_X
+
+- 11. mean_tGravityAcc_std_Y
+
+- 12. mean_tGravityAcc_std_Z
+
+- 13. mean_tBodyAccJerk_mean_X
+
+- 14. mean_tBodyAccJerk_mean_Y
+
+- 15. mean_tBodyAccJerk_mean_Z
+
+- 16. mean_tBodyAccJerk_std_X
+
+- 17. mean_tBodyAccJerk_std_Y
+
+- 18. mean_tBodyAccJerk_std_Z
+
+- 19. mean_tBodyGyro_mean_X 
+
+- 20. mean_tBodyGyro_mean_Y
+
+- 21. mean_tBodyGyro_mean_Z
+
+- 22. mean_tBodyGyro_std_X
+
+- 23. mean_tBodyGyro_std_Y
+
+- 24.  mean_tBodyGyro_std_Z
+
+- 25. mean_tBodyGyroJerk_mean_X
+
+- 26. mean_tBodyGyroJerk_mean_Y
+
+- 27. mean_tBodyGyroJerk_mean_Z
+
+- 28. mean_tBodyGyroJerk_std_X
+
+- 29. mean_tBodyGyroJerk_std_Y
+
+- 30. mean_tBodyGyroJerk_std_Z
+
+- 31. mean_tBodyAccMag_mean
+
+- 32. mean_tBodyAccMag_std
+
+- 33. mean_tGravityAccMag_mean
+
+- 34. mean_tGravityAccMag_std
+
+- 35. mean_tBodyAccJerkMag_mean
+
+- 36. mean_tBodyAccJerkMag_std
+
+- 37. mean_tBodyGyroMag_mean
+
+- 38. mean_tBodyGyroMag_std
+
+- 39. mean_tBodyGyroJerkMag_mean
+
+- 40. mean_tBodyGyroJerkMag_std
+
+- 41. mean_fBodyAcc_mean_X
+
+- 42. mean_fBodyAcc_mean_Y
+
+- 43. mean_fBodyAcc_mean_Z
+
+- 44. mean_fBodyAcc_std_X
+
+- 45. mean_fBodyAcc_std_Y
+
+- 46. mean_fBodyAcc_std_Z
+
+- 47. mean_fBodyAccJerk_mean_X
+
+- 48. mean_fBodyAccJerk_mean_Y
+
+- 49. mean_fBodyAccJerk_mean_Z
+
+- 50. mean_fBodyAccJerk_std_X
+
+- 51. mean_fBodyAccJerk_std_Y
+
+- 52. mean_fBodyAccJerk_std_Z
+
+- 53. mean_fBodyGyro_mean_X
+
+- 54. mean_fBodyGyro_mean_Y
+
+- 55. mean_fBodyGyro_mean_Z
+
+- 56. mean_fBodyGyro_std_X
+
+- 57. mean_fBodyGyro_std_Y
+
+- 58. mean_fBodyGyro_std_Z
+
+- 59. mean_fBodyAccMag_mean
+
+- 60. mean_fBodyAccMag_std
+
+- 61. mean_fBodyAccJerkMag_mean
+
+- 62. mean_fBodyAccJerkMag_std
+
+- 63. mean_fBodyGyroMag_mean
+
+- 64. mean_fBodyGyroMag_std
+
+- 65. mean_fBodyGyroJerkMag_mean
+
+- 66. mean_fBodyGyroJerkMag_std
+
+
+
+
+
+[1]: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+[2]: http://archive.ics.uci.edu/ml/index.html
+[4]: https://sites.google.com/site/smartlabdibrisunige/
+[5]: http://link.springer.com/chapter/10.1007/978-3-642-35395-6_30

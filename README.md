@@ -173,7 +173,8 @@ arrange()* function.  See the R script for details.  The table was written to a 
 using *write.table()* with the optional arguments *row.names* and *quote* both set to FALSE, and this file
 was submitted to the Coursera class site as part of this project's requirements.  
 
-The table can be read back into R using *read.table("tidy.txt", header = TRUE).*  Note that the data frame
+The table can be read back into R using *read.table("tidy.txt", header = TRUE, colClasses = c(activity =
+"factor", subject = "factor"))*.*  Note that the data frame
 that was written to file had the subject and activity columns as factors and all other columns as numeric.
 The table read in by *read.table()* above will read the activity as factor and the subject as integer, and
 all other columns as numeric.
