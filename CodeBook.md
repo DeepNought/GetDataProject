@@ -54,6 +54,40 @@ The **features_info.txt** file gave the following information on the dataset var
 >These signals were used to estimate variables of the feature vector for each pattern:  
 '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
 
+>tBodyAcc-XYZ
+
+>tGravityAcc-XYZ
+
+>tBodyAccJerk-XYZ
+
+>tBodyGyro-XYZ
+
+>tBodyGyroJerk-XYZ
+
+>tBodyAccMag
+
+>tGravityAccMag
+
+>tBodyAccJerkMag
+
+>tBodyGyroMag
+
+>tBodyGyroJerkMag
+
+>fBodyAcc-XYZ
+
+>fBodyAccJerk-XYZ
+
+>fBodyGyro-XYZ
+
+>fBodyAccMag
+
+>fBodyAccJerkMag
+
+>fBodyGyroMag
+
+>fBodyGyroJerkMag
+
 #### Data Manipulation
 
 An R script, **run_analysis.R**, was written to read the above data files and manipulate the data with the
@@ -67,24 +101,25 @@ concatenated them using bind_rows().
 - 3.  Read the **features.txt** file to select a subset of the variables and to create descriptive names for
 them.
 - 4.  Used *grep()* to select only variable names that had *mean()* and *std()* as part of their name.
-- 5.  The index vector returned by *grep()* was used to subset the data frame created in step 2 and
+- 5.  The index vector returned by *grep()* was used to subset the data.frame object created in step 2 and
 keep only the variables that had *mean()* or *std()* in their names.
 - 6.  *gsub()* was used to modify the names of the selected variables: leading digits and spaces were
 removed, *()* were removed, dashes were replaced by underscores, and the string *mean_* was pasted to
-the beginning of each variable name.  The resulting names were assigned to the columns of the data.frame
-object.
+the beginning of each variable name.  This was done because the mean of each variable constitutes the
+columns of the output data. The resulting names were assigned to the columns of the data.frame
+object in step 2.
 - 7.  The **y.train.txt** and **y.test.txt** files were read using *readLines()* and their contents
 concatenated.
 - 8.  **activity_labels.txt** was read into a data.frame object, and was used as a lookup table to turn
 the vector in step 7 above into a vector of activity labels using *sapply()* and an anonymous function.
-- 9.  The vector from step 8 above was inserted into the data.frame object from step 2 above and named
-*activity*
+- 9.  The vector from step 8 above was inserted as a column into the front of the data.frame object from
+step 2 above and named *activity*
 - 10.  **subject_train.txt** and **subject_test.txt** were read and concatenated.  The resulting vector was
-inserted into the data.frame object from step 2 above and named *subject.*
-- 11.  This data frame was then grouped by the *activity* and *subject* using *group_by(),* and the mean() of
-the numeric variables was calculated by a call to *summarise_each().*
-- 12.  The data frame was then ordered by a call to *arrange().*
-- 13.  Finally, the data frame was written to a file named **tidy.txt** by a call to write.table().
+inserted as a column into the front of the data.frame object from step 2 above and named *subject.*
+- 11.  This data.frame object was then grouped by the *activity* and *subject* using *group_by(),* and the
+mean() of the numeric variables was calculated by a call to *summarise_each().*
+- 12.  The data.frame object was then ordered by a call to *arrange().*
+- 13.  Finally, the data.frame object was written to a file named **tidy.txt** by a call to write.table().
 
 Note:  the file **tidy.txt** can be read into R using:
 - *read.table("tidy.txt", header = TRUE, colClasses = c(activity = "factor", subject = "factor"))*
@@ -97,8 +132,9 @@ Note:  the file **tidy.txt** can be read into R using:
 
 All variables listed below are numeric and bounded in the range of [-1, 1].  (The corresponding variables
 in the original dataset were normalized and bounded in the range [-1, 1].)  X, Y, Z in the variable names
-denotes vector components for the respective axis.  All variable names start with *mean_* because they are
-the mean of the original variables.
+denotes vector components for the respective axis.  All variable names begin with *mean_* because they are
+the mean of the original variables.  Variable names beginning with *mean_t* indicate time domain variables,
+and those beginning with *mean_f* indicate their frequency domain counterparts.
 
 Units for the acceleration variables (Acc) are meters/square second
 
