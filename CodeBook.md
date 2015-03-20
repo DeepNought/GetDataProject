@@ -98,8 +98,8 @@ subject variables and calculated the mean for each of the remaining numeric vari
 	1.  Downloaded the zipped data file and unzipped it.
 	2.  Read the **X_train.txt** and **X_test.txt** files into data.frame objects using read.table() and
 concatenated them using bind_rows().
-	3.  Read the **features.txt** file to select a subset of the variables and to create descriptive names for
-them.
+	3.  Read the **features.txt** file to select a subset of the variables and to create descriptive names
+	for them.
 	4.  Used *grep()* to select only variable names that had *mean()* and *std()* as part of their name.
 	5.  The index vector returned by *grep()* was used to subset the data.frame object created in step 2 and
 keep only the variables that had *mean()* or *std()* in their names.
