@@ -127,9 +127,9 @@ Note:  the file **tidy.txt** can be read into R using:
 
 #### Data Dictionary
 
-- activity:  factor with 6 levels (LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS WALKING_UPSTAIRS)
+	activity:  factor with 6 levels (LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS WALKING_UPSTAIRS)
 
-- subject:  factor with 30 levels (1..30)
+	subject:  factor with 30 levels (1..30)
 
 All variables listed below are numeric and bounded in the range of [-1, 1].  (The corresponding variables
 in the original dataset were normalized and bounded in the range [-1, 1].)  X, Y, Z in the variable names
@@ -155,13 +155,13 @@ Units for the gyroscope jerk magnitude (GyroJerkMag) are radians/square second
 
 Units for the Fast Fourier Transform variables are the same as their corresponding time domain variables.
 
-- mean_tBodyAcc_mean_X
+	mean_tBodyAcc_mean_X
 
-- mean_tBodyAcc_mean_Y
+	mean_tBodyAcc_mean_Y
  
-- mean_tBodyAcc_mean_Z
+	mean_tBodyAcc_mean_Z
 
-- mean_tBodyAcc_std_X
+	mean_tBodyAcc_std_X
 
 - mean_tBodyAcc_std_Y
 
