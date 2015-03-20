@@ -97,27 +97,27 @@ subject variables and calculated the mean for each of the remaining numeric vari
 
 	1.  Downloaded the zipped data file and unzipped it.
 	2.  Read the **X_train.txt** and **X_test.txt** files into data.frame objects using read.table() and
-	concatenated them using bind_rows().
+		concatenated them using bind_rows().
 	3.  Read the **features.txt** file to select a subset of the variables and to create descriptive names
-	for them.
+		for them.
 	4.  Used *grep()* to select only variable names that had *mean()* and *std()* as part of their name.
 	5.  The index vector returned by *grep()* was used to subset the data.frame object created in step 2 and
-	keep only the variables that had *mean()* or *std()* in their names.
+		keep only the variables that had *mean()* or *std()* in their names.
 	6.  *gsub()* was used to modify the names of the selected variables: leading digits and spaces were
-removed, *()* were removed, dashes were replaced by underscores, and the string *mean_* was pasted to
-the beginning of each variable name.  This was done because the mean of each variable constitutes the
-columns of the output data. The resulting names were assigned to the columns of the data.frame
-object in step 2.
+		removed, *()* were removed, dashes were replaced by underscores, and the string *mean_* was pasted to
+		the beginning of each variable name.  This was done because the mean of each variable constitutes the
+		columns of the output data. The resulting names were assigned to the columns of the data.frame
+		object in step 2.
 	7.  The **y.train.txt** and **y.test.txt** files were read using *readLines()* and their contents
-concatenated.
+		concatenated.
 	8.  **activity_labels.txt** was read into a data.frame object, and was used as a lookup table to turn
-the vector in step 7 above into a vector of activity labels using *sapply()* and an anonymous function.
+		the vector in step 7 above into a vector of activity labels using *sapply()* and an anonymous function.
 	9.  The vector from step 8 above was inserted as a column into the front of the data.frame object from
-step 2 above and named *activity*
+		step 2 above and named *activity*
 	10.  **subject_train.txt** and **subject_test.txt** were read and concatenated.  The resulting vector was
-inserted as a column into the front of the data.frame object from step 2 above and named *subject.*
+		inserted as a column into the front of the data.frame object from step 2 above and named *subject.*
 	11.  This data.frame object was then grouped by the *activity* and *subject* using *group_by(),* and the
-mean() of the numeric variables was calculated by a call to *summarise_each().*
+		mean() of the numeric variables was calculated by a call to *summarise_each().*
 	12.  The data.frame object was then ordered by a call to *arrange().*
 	13.  Finally, the data.frame object was written to a file named **tidy.txt** by a call to write.table().
 
